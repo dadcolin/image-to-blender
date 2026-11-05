@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "case": "replace-with-object-name",
+  "input_background": "white-or-alpha",
+  "input_sha256": null,
+  "public_redistribution_permission_confirmed": false,
+  "asset_license": null,
+  "native_model_run_verified": false,
+  "model_revision": null,
+  "seed": 42,
+  "steps": 50,
+  "num_gaussians": 262144,
+  "native_seconds": null,
+  "mesh_seconds": null,
+  "export_and_reopen_seconds": null,
+  "dimension_targets": null,
+  "actual_dimensions": null,
+  "visual_views_reviewed": [],
+  "structural_errors": [],
+  "unverified_surfaces": [],
+  "visual_qa_approved": false
+}

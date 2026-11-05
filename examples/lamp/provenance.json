@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "example": "lamp",
+  "origin": "Single photograph processed by IDOL on NVIDIA DGX Spark; engineering mesh extraction and Blender export on a separate Windows CPU workstation.",
+  "input": {
+    "published_file": "lamp-reference.png",
+    "width": 401,
+    "height": 498,
+    "original_inference_input_sha256": "bc1ce79a1705067f65de1976d103261aefcbe586dd95ee273dd02438b0e7ed4e",
+    "published_file_sha256": "f1e5d8eed17c7d9a5f265091186a97d174556119c504181b727f5fe292999a0e",
+    "decoded_RGB_pixel_sha256": "bc1507cf9a0ac620a248bdd5b085d8d9b2a4d05e7a48c6901ed34ef360c78b67",
+    "published_RGB_pixels_identical_to_original": true,
+    "metadata_removed": true
+  },
+  "upstream": {
+    "sdk_repository": "https://github.com/speridlabs/idol-sdk",
+    "sdk_commit": "4702a7f00850e34b6e83a2170cc123c3e9570744",
+    "models": {
+      "idol": {
+        "repository": "speridlabs/idol",
+        "revision": "2731c2291fc65a797c5cb627a5e5526fc1490902"
+      },
+      "dinov3": {
+        "repository": "facebook/dinov3-vith16plus-pretrain-lvd1689m",
+        "revision": "c807c9eeea853df70aec4069e6f56b28ddc82acc"
+      },
+      "flux2_vae": {
+        "repository": "black-forest-labs/FLUX.2-dev",
+        "revision": "26afe3a78bb242c0a8bb181dcc8937bb16e5c66c"
+      }
+    }
+  },
+  "inference": {
+    "seed": 42,
+    "steps": 50,
+    "cfg_strength": 3.0,
+    "rescale_t": 3.0,
+    "num_gaussians": 262144,
+    "dinov3_dtype": "bf16",
+    "optimize": false,
+    "attention_backend": "sdpa",
+    "torch_compile": false,
+    "mode": "real",
+    "crop_margin": 1.7,
+    "native_output": "3D Gaussian splats",
+    "native_gaussians": 262144,
+    "native_ply_sha256": "adc898bbcfbd8abe31114b2fec07e5f997b92ac4cb714352ee3d3a1693b9314b",
+    "native_triangle_mesh": false
+  },
+  "mesh": {
+    "method": "anisotropic_Gaussian_sum_density_Lewiner_marching_cubes",
+    "engineering_approximation": true,
+    "resolution": 256,
+    "iso_level": 0.5,
+    "min_opacity": 0.005,
+    "cutoff_sigma": 3.0,
+    "color_method": "density_weighted_SH0_grid_trilinear_interpolation",
+    "colors_are_baked_appearance_not_PBR": true,
+    "axis_conversion": "PLY y-up to Blender z-up: one -90 degree X rotation",
+    "metrics": {
+      "vertices": 179005,
+      "faces": 354288,
+      "zero_area_faces": 0,
+      "boundary_edges": 4,
+      "nonmanifold_edges": 0,
+      "connected_components": 1345
+    },
+    "main_component_vertex_fraction": 0.8602,
+    "numerical_cleanup": {
+      "method": "exact_zero_cross_product_in_float64_only",
+      "tolerance": 0,
+      "input_vertices": 179005,
+      "input_faces": 354290,
+      "removed_zero_area_faces": 2,
+      "removed_unreferenced_vertices": 0
+    },
+    "smoothing": false,
+    "component_removal": false,
+    "decimation": false,
+    "metric_scale_known": false,
+    "dimension_constraints_applied": false
+  },
+  "blender": {
+    "file": "lamp-IDOL.blend",
+    "sha256": "63ae8474eb7d62392d980de06d57373fb1c996d3e3620db42c95d248779774df",
+    "version": "5.2.3 LTS",
+    "mesh_objects": 1,
+    "modifiers": 0,
+    "requires_gaussian_addon": false,
+    "fresh_reopen_verified": true,
+    "edit_mode_verified": true,
+    "publication_copy_geometry_arrays_identical": true,
+    "embedded_scripts": false,
+    "external_assets": false,
+    "custom_properties": false
+  },
+  "renders": [
+    {
+      "file": "lamp-IDOL-preview.png",
+      "sha256": "4b0c325b064c51b556e213d1aab3410df9e7777d50cd1c70cd72f1ebc4514450",
+      "width": 768,
+      "height": 768,
+      "metadata_removed": true,
+      "RGB_pixels_identical_to_original_render": true
+    },
+    {
+      "file": "lamp-IDOL-views.png",
+      "sha256": "f2f23c67bcc3db63eb558aca1bbbf1e3bb8d3742cd71d3c5660345ec59319f56",
+      "width": 1536,
+      "height": 1242,
+      "metadata_removed": true,
+      "RGB_pixels_identical_to_original_render": true
+    }
+  ],
+  "limitations": [
+    "Backside and occluded structure are inferred from one image.",
+    "Rough shade edges, distorted joints, and inaccurate small screw/switch details remain.",
+    "All 1345 connected components are retained; small fragments and 4 boundary edges remain.",
+    "Baked colors include original illumination and reflections; this is not a relightable PBR material.",
+    "No dimensional, roundness, watertightness, printability, or production-CAD approval."
+  ],
+  "asset_permission": "Redistribution for demonstration granted by the contributor. This statement grants no broader rights."
+}

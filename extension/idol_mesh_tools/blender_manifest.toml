@@ -1,0 +1,17 @@
+schema_version = "1.0.0"
+id = "idol_mesh_tools"
+version = "0.1.0"
+name = "IDOL Mesh Tools"
+tagline = "Import derived meshes and size objects or selected parts"
+maintainer = "dadcolin"
+type = "add-on"
+website = "https://github.com/dadcolin/image-to-blender"
+tags = ["Import-Export", "Mesh", "Object"]
+blender_version_min = "4.2.0"
+license = ["SPDX:GPL-3.0-or-later"]
+
+[permissions]
+files = "Read user-selected local mesh bundles for import"
+
+[build]
+paths_exclude_pattern = ["__pycache__/", ".git/", "*.pyc"]

@@ -1,0 +1,37 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "image-to-blender"
+version = "0.1.0"
+description = "Auditable local image reconstruction artifacts and editable Blender mesh export"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "GPL-3.0-or-later"
+dependencies = [
+  "numpy>=1.26,<3",
+  "scipy>=1.11,<2",
+  "scikit-image>=0.22,<1",
+  "plyfile>=1.0,<2",
+  "psutil>=5.9,<8",
+  "Pillow>=10,<14",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+
+[project.scripts]
+image-to-blender = "image_to_blender.cli:main"
+
+[project.urls]
+Repository = "https://github.com/dadcolin/image-to-blender"
+Issues = "https://github.com/dadcolin/image-to-blender/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
