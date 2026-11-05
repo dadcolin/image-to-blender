@@ -9,6 +9,14 @@ Checked on **2026-11-05**. This separates real model history, actual portable CP
 - **Python suite:** 55 tests and 42 unittest subtests passed locally on Python 3.13.14. These cover actual small density reconstruction, covariance/color/axis handling, image/source hash binding, metadata stripping, dimensions, path escape/tamper rejection and child-process cleanup. Upstream scikit-image/NumPy deprecation warnings remain, without test failures.
 - **Inference adapter tests:** 25 of the tests use explicitly simulated Torch/IDOL/Hugging Face objects to check argument forwarding, files, hashes, failure propagation and no retry. They do **not** demonstrate a fresh GPU run of the repackaged adapter. The independent adapter still needs testing on additional GPU platforms; the reference model execution is documented separately.
 
-The add-on declares Blender 4.2 as its API minimum; **only 5.2.3 LTS was actually exercised here**. No claim is made that every older version, driver, architecture, object class or dependency combination was tested. A Linux Python 3.11/3.12 Actions template is provided under `docs/ci/`. Automatic CI is not enabled in this initial release: the publishing OAuth credential lacks GitHub workflow scope. No Linux CI pass is claimed.
+The add-on declares Blender 4.2 as its API minimum; **only 5.2.3 LTS was actually exercised here**. No claim is made that every older version, driver, architecture, object class or dependency combination was tested.
+
+## GitHub Actions
+
+The active [CPU tests workflow](../.github/workflows/test.yml) runs on pushes and pull requests using `ubuntu-latest` with Python **3.11 and 3.12**. It installs `.[test]` and runs `python -B -m pytest -q` with read-only repository permissions.
+
+[Run 42075007097](https://github.com/dadcolin/image-to-blender/actions/runs/42075007097) completed successfully on **2026-11-05 at 17:29 UTC**, for commit [`68ea3751c344832a73c2fb71fd780f162dacc7fa`](https://github.com/dadcolin/image-to-blender/commit/68ea3751c344832a73c2fb71fd780f162dacc7fa). Both `unit (3.11)` and `unit (3.12)` passed. This records that specific run; see [GitHub Actions](https://github.com/dadcolin/image-to-blender/actions) for the current status and [CI setup](ci/README.md) for configuration details.
+
+These are CPU Python checks, including simulated inference-adapter tests. The workflow does not run GPU inference, download model weights, or exercise Blender itself. Its success does not extend the separate Blender or model validation claims above.
 
 The public lamp `.blend` and PNGs are separately sanitized copies of the original reviewed example. Their geometry/colors and decoded image pixels were compared to the originals, and the fresh scene was reopened. This file describes technical checks, not a blanket visual, dimensional, CAD, fabrication or commercial-rights approval.
